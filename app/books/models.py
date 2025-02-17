@@ -16,8 +16,6 @@ class Book(Base):
     is_available = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    reviews = relationship("Review", back_populates="book")
-    orders = relationship("Order", back_populates="book")
 
 
 class Review(Base):
@@ -30,4 +28,5 @@ class Review(Base):
     comment = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    book = relationship("Book", back_populates="reviews")
+    user = relationship("User", backref="user_reviews")
+    book = relationship("Book", backref="book_reviews")

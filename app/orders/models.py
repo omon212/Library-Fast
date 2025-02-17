@@ -4,6 +4,7 @@ from datetime import datetime
 from app.databace import Base
 
 
+
 class Order(Base):
     __tablename__ = "orders"
 
@@ -15,4 +16,5 @@ class Order(Base):
     returned_at = Column(DateTime, nullable=True)
     status = Column(String(20), nullable=False, default="WAITING")
 
-    book = relationship("Book", back_populates="orders")
+    user = relationship("User", backref="user_orders")
+    book = relationship("Book", backref="book_orders")
