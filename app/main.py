@@ -1,14 +1,17 @@
 from fastapi import FastAPI
-from app.users.routers import user as user_router
 from fastapi.security import OAuth2PasswordBearer
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi.openapi.utils import get_openapi
 from app.books.routers import books as books_router
+from app.users.routers import user as user_router
+from app.orders.routers import orders as orders_router
 
 app = FastAPI()
 app.include_router(user_router)
-app.add_middleware(SessionMiddleware, secret_key="fastapi_project")
 app.include_router(books_router)
+app.include_router(orders_router)
+
+app.add_middleware(SessionMiddleware, secret_key="fastapi_project")
 
 
 def custom_openapi():
