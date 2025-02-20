@@ -39,7 +39,7 @@ def get_current_user(request: Request, db: Session = Depends(get_db)):
     except JWTError:
         return None
 
-def verify_token(token: str):
+def verify_token(token: str) -> object:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         if datetime.utcnow() > datetime.utcfromtimestamp(payload["exp"]):
